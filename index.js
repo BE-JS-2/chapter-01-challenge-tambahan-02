@@ -6,7 +6,7 @@
 /**
  * Diberikan 2 function:
  * meleeRangedGrouping yang menerima 1 parameter berupa string. 
- * Implementasikan meleeRangedGrouping agar dapat menghasilkan multidimensional array seperti yang diminta. 
+ * Implementasikan meleeRangedGrouping agar dapat menghasilkan multidimensional array seperti yang diminta. ;
  * Format string yang diberikan adalah <nama_hero>-<tipe_hero>,<nama_hero>-<tipe-hero>, ... 
  * sedangkan output yang diharapkan adalah [ [ <daftar_hero_dengan_tipe_ranged> ], [ <daftar_hero_dengan_tipe_melee> ] ]. 
  * Jika input adalah string kosong ('') maka return array kosong
@@ -45,9 +45,22 @@ console.log(meleeRangedGrouping('')); // []
  */
 
 
-function deepSum(arr) {
-  // write your code here
+ function deepSum(arr) {
+  let result = [];
+  let data = arr.forEach((number1) => {
+    number1.forEach((number2) => {
+      number2.forEach((number3) => {
+        result.push(number3);
+      });
+    });
+  });
+  console.log(result);
+  return result.reduce((a, b) => {
+    return a + b;
+  });
+
 }
+
 
 console.log(
   deepSum([
@@ -102,7 +115,8 @@ console.log(
 
 
  function slice(data, start, end) {
-  // your code here
+  const cut = data.slice(start,end);
+  return cut;
 }
 
 console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 2)) // [ 'camel', 'duck', 'elephant' ]
@@ -123,8 +137,16 @@ console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 20)) //[]
 
 
 function biggestSum(array) {
-
+  let num = array.sort().reverse()
+  let result = 0;
+  for (let i = 0; i < 2; i++) {
+    result += num[i]
+  }
+  
+  return (array.length === 1) ? num[0] : result;
 }
+
+
 
 
 console.log(biggestSum([10, 4, 90, 7, 73, 2, 10])) // expected output: 163
