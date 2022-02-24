@@ -18,10 +18,26 @@
 
  function splitting(str) {
   //your code here
+  if (str === ''){
+    return []
+  }
 }
 
 function meleeRangedGrouping (str) {
   //your code here
+  var arr = str.split(',');
+  var range = [];
+  var melee = [];
+  for (var i in arr){
+    var pisah = arr[i].split('-')
+    if (pisah[1] === 'Ranged'){
+      range.push(pisah[0])
+    } else {
+      melee.push(pisah[0])
+    }
+  }
+  var result = [range, melee]
+  return result
 }
 
 // TEST CASE
@@ -103,6 +119,8 @@ console.log(
 
  function slice(data, start, end) {
   // your code here
+  const potong = data.slice(start,end);
+  return potong;
 }
 
 console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 2)) // [ 'camel', 'duck', 'elephant' ]
@@ -123,7 +141,11 @@ console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 20)) //[]
 
 
 function biggestSum(array) {
-
+  // let sum = array[0], max = array[0];
+  // for (let i = 1; i < array.length; ++i){
+  //    sum = Math.max(sum + array[i], array[i]), max = Math.max(max, sum);
+  // };
+  // return max;
 }
 
 
