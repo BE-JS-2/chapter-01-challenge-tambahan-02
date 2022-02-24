@@ -14,7 +14,7 @@
  * Jika input yang diberikan adalah 'QOP-Ranged,Anti Mage-Melee' maka output yang diharapkan adalah ['QOP-Ranged', 'Anti Mage-Melee']
  */
 
- function splitting(str) {
+function splitting(str) {
   const heroes = str.split(",").map((hero) => hero.split("-"));
   return heroes;
 }
@@ -117,7 +117,9 @@ console.log(
 
 function slice(data, start, end) {
   const noEnd = end === undefined;
+  const noCriteria = start === undefined && noEnd;
   if (noEnd) return data.splice(start);
+  if (noCriteria) return data;
   return data.splice(start, end - start);
 }
 
