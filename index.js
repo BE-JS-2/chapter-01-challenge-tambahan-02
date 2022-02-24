@@ -206,9 +206,11 @@ function flippingMatrix(array) {
   }
   for (let i = 0; i < hasil.length; i++) {
     if (tempFlip < hasil[i]) {
-      tempFlip = hasil;
+      tempFlip = hasil[i];
       indexMax = i;
-      console.log(indexMax, hasil[i], indexMax);
+      // console.log(indexMax, hasil[i], indexMax);
+    } else {
+      indexMax = indexMax;
     }
   }
 
@@ -219,15 +221,15 @@ function flippingMatrix(array) {
       flipped.push(array[i].reverse());
     }
   }
-  return indexMax;
+  return flipped;
 }
 
-// console.log(
-//   flippingMatrix([
-//     [1, 2],
-//     [3, 4],
-//   ])
-// );
+console.log(
+  flippingMatrix([
+    [1, 2],
+    [3, 4],
+  ])
+);
 
 // expected output:
 // [
