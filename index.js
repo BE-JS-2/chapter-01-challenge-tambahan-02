@@ -16,12 +16,33 @@
  */
 
 
- function splitting(str) {
-  //your code here
+function splitting(str) {
+    //your code here
+    if (str === '') {
+        return [];
+    }
+
+    let hero = str.split(',');
+    let heroRanged = hero.filter(e => {
+        return e.split('-')[1] === 'Ranged';
+    })
+    let heroMelee = hero.filter(e => {
+        return e.split("-")[1] === 'Melee';
+    })
+    let temp = [];
+    heroRanged = heroRanged.map(e => {
+        return e.split("-")[0];
+    })
+    heroMelee = heroMelee.map(e => {
+        return e.split("-")[0];
+    })
+    temp.push(heroRanged, heroMelee);
+    return temp;
 }
 
-function meleeRangedGrouping (str) {
-  //your code here
+function meleeRangedGrouping(str) {
+    //your code here
+    return splitting(str);
 }
 
 // TEST CASE
@@ -46,46 +67,80 @@ console.log(meleeRangedGrouping('')); // []
 
 
 function deepSum(arr) {
-  // write your code here
+    // write your code here
+    if (arr.length === 0) return "No Number";
+    let total = 0;
+    arr.forEach(e1 => {
+        e1.forEach(e2 => {
+            e2.forEach(e3 => {
+                total += e3;
+            })
+        })
+    })
+    return total;
 }
 
 console.log(
-  deepSum([
-    [
-      [4, 5, 6],
-      [9, 1, 2, 10],
-      [9, 4, 3]
-    ],
-    [
-      [4, 14, 31],
-      [9, 10, 18, 12, 20],
-      [1, 4, 90]
-    ],
-    [
-      [2, 5, 10],
-      [3, 4, 5],
-      [2, 4, 5, 10]
-    ]
-  ])
-) // 316
+        deepSum([
+            [
+                [4, 5, 6],
+                [9, 1, 2, 10],
+                [9, 4, 3]
+            ],
+            [
+                [4, 14, 31],
+                [9, 10, 18, 12, 20],
+                [1, 4, 90]
+            ],
+            [
+                [2, 5, 10],
+                [3, 4, 5],
+                [2, 4, 5, 10]
+            ]
+        ])
+    ) // 316
 
 console.log(
-  deepSum([
-    [[20, 10], [15], [1, 1]],
-    [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], [2], [9, 11]],
-    [[3, 5, 1], [1, 5, 3], [1]],
-    [[2]]
-  ])
-) // 156
+        deepSum([
+            [
+                [20, 10],
+                [15],
+                [1, 1]
+            ],
+            [
+                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                [2],
+                [9, 11]
+            ],
+            [
+                [3, 5, 1],
+                [1, 5, 3],
+                [1]
+            ],
+            [
+                [2]
+            ]
+        ])
+    ) // 156
 
 console.log(deepSum([])) // No number
 
 console.log(
-  deepSum([
-    [[20, 10], [15], [1, 1]],
-    [[1, 2, 3, 9, 10, 11], [2], [9, 11]],
-    [[2]]
-  ])
+    deepSum([
+        [
+            [20, 10],
+            [15],
+            [1, 1]
+        ],
+        [
+            [1, 2, 3, 9, 10, 11],
+            [2],
+            [9, 11]
+        ],
+        [
+            [2]
+        ]
+    ])
 )
 
 
@@ -101,8 +156,12 @@ console.log(
  */
 
 
- function slice(data, start, end) {
-  // your code here
+function slice(data, start, end) {
+    // your code here
+    if (start > data.length) return [];
+    let startSl = start || 0;
+    let endSl = end || data.length;
+    return data.slice(start, endSl);
 }
 
 console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 2)) // [ 'camel', 'duck', 'elephant' ]
@@ -123,7 +182,15 @@ console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 20)) //[]
 
 
 function biggestSum(array) {
-
+    let total = array[0];
+    for (let i = 0; i < array.length; i++) {
+        for (let j = i + 1; j < array.length; j++) {
+            if (array[i] + array[j] > total) {
+                total = array[i] + array[j];
+            }
+        }
+    }
+    return total;
 }
 
 
@@ -144,15 +211,38 @@ console.log(biggestSum([9])) // expected output: 9
 
 
 function flippingMatrix(array) {
-
+    let total = 0;
+    let temp;
+    let k;
+    for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array.length; j++) {
+            temp += array[i][j];
+            if (temp > total) {
+                total = temp;
+                k = i;
+            }
+        }
+        temp = 0;
+    }
+    let l = 0;
+    let copyArray = JSON.parse(JSON.stringify(array));
+    for (let i = 0; i < array.length; i++) {
+        for (let j = array.length - 1; j >= 0; j--) {
+            if (k === i) {
+                copyArray[i][l] = array[i][j];
+                ++l;
+            }
+        }
+    }
+    return copyArray;
 }
 
 
 console.log(flippingMatrix(
-  [
-    [1, 2],
-    [3, 4]
-  ]
+    [
+        [1, 2],
+        [3, 4]
+    ]
 ))
 
 // expected output:
@@ -164,11 +254,11 @@ console.log(flippingMatrix(
 
 
 console.log(flippingMatrix(
-  [
-    [3, 0, 9],
-    [10, 7, 3],
-    [9, 4, 1]
-  ]
+    [
+        [3, 0, 9],
+        [10, 7, 3],
+        [9, 4, 1]
+    ]
 ))
 
 // expected output
