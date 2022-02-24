@@ -18,10 +18,22 @@
 
  function splitting(str) {
   //your code here
+  return str.split(',').map(d => {
+    return d.split('-')
+  })
 }
 
 function meleeRangedGrouping (str) {
   //your code here
+  const result = [[], []];
+  splitting(str).forEach((d, i) => {
+    if (d[1] === "Ranged") {
+      result[0].push(d.shift())
+    } else if (d[1] === "Melee") {
+      result[1].push(d.shift())
+    } 
+  })
+  return (str.length) ? result : [];
 }
 
 // TEST CASE
@@ -47,6 +59,16 @@ console.log(meleeRangedGrouping('')); // []
 
 function deepSum(arr) {
   // write your code here
+  let total = 0;
+  arr.forEach(d1 => {
+    d1.forEach(d2 => {
+      d2.forEach(d3 => {
+        total += d3;
+      })
+    })
+  })
+
+  return total
 }
 
 console.log(
@@ -103,6 +125,7 @@ console.log(
 
  function slice(data, start, end) {
   // your code here
+  return data.slice(start, end)
 }
 
 console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 2)) // [ 'camel', 'duck', 'elephant' ]
@@ -123,7 +146,13 @@ console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 20)) //[]
 
 
 function biggestSum(array) {
-
+  let num = array.sort().reverse()
+  let result = 0;
+  for (let i = 0; i < 2; i++) {
+    result += num[i]
+  }
+  
+  return (array.length === 1) ? num[0] : result;
 }
 
 
@@ -144,7 +173,39 @@ console.log(biggestSum([9])) // expected output: 9
 
 
 function flippingMatrix(array) {
+  const arr  = []
+  
+  array.forEach((d) => {
+    if (d.length === 2) {
+      arr.push(d[0] + d[1])
+    } else {
+      arr.push(d[0] + d[1] + d[2])
+    }
+  });
 
+  let index = 0;
+  for (let i = 0; i < 1; i++) {
+    if (arr.length === 2) {
+      if (arr > arr[1]) {
+        index = 0;
+      } else {
+        index = 1;
+      }
+    } else {
+      if (arr[0] > arr[1]) {
+        if (arr[0] > arr[2]) {
+          index = 0
+        } else {
+          index = 2
+        }
+      } else if (arr[1] > arr[2]) {
+        index = 1
+      }
+    }
+  }
+  array[index].reverse();
+
+  return array;
 }
 
 
