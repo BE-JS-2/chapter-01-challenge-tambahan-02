@@ -18,8 +18,10 @@
 
  function splitting(str) {
   //your code here
-}
+  // ngesplit string => array [[nama-hero, jenis-hero], [nama-hero, jenis-hero], []]
 
+}
+splitting()
 function meleeRangedGrouping (str) {
   //your code here
 }
