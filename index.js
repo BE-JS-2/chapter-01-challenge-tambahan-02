@@ -18,13 +18,30 @@
 
  function splitting(str) {
   //your code here
+  // ngesplit string => array [[nama-hero, jenis-hero], [nama-hero, jenis-hero], []]
+  let temp = str.split(',').map(element => element.split('-'))
+  return temp
 }
 
 function meleeRangedGrouping (str) {
   //your code here
-}
+  let temp = splitting(str) // array 2 dimesi
 
-// TEST CASE
+  let result = [[], []]
+  temp.forEach((element) => {
+    if (element[1] === 'Ranged') {
+      result[0].push(element[0])
+    } else {
+      result[1].push(element[0])
+    }
+  })
+
+  if (!str) {
+    return []
+  }
+  return result
+
+}
 
 console.log(meleeRangedGrouping('Razor-Ranged,Invoker-Ranged,Meepo-Melee,Axe-Melee,Sniper-Ranged'));
 // [ ['Razor', 'Invoker', 'Sniper'], ['Meepo', 'Axe'] ]
@@ -47,6 +64,15 @@ console.log(meleeRangedGrouping('')); // []
 
 function deepSum(arr) {
   // write your code here
+  let result = 0
+  arr.forEach((element) => {
+    element.forEach((elementTwo) => {
+      elementTwo.forEach((elementThree) => {
+          result += elementThree
+      }) 
+    }) 
+  })
+  return result;
 }
 
 console.log(
@@ -90,19 +116,20 @@ console.log(
 
 
 
-/**
- * SOAL NO. 13
- */
+// /**
+//  * SOAL NO. 13
+//  */
 
 
-/**
- * Diberikan sebuah function slice yang dapat menerima 3 paramter yaitu data (mandatory) dengan tipe
- * Array, start (optional) dengan tipe integer dan end (optional) dengan tipe integer.
- */
+// /**
+//  * Diberikan sebuah function slice yang dapat menerima 3 paramter yaitu data (mandatory) dengan tipe
+//  * Array, start (optional) dengan tipe integer dan end (optional) dengan tipe integer.
+//  */
 
 
- function slice(data, start, end) {
+function slice(data, start, end) {
   // your code here
+  return data.slice(start, end)
 }
 
 console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 2)) // [ 'camel', 'duck', 'elephant' ]
@@ -112,18 +139,28 @@ console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'])) //[ 'ant', 'bi
 console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 20)) //[]
 
 
-/**
- * SOAL NO. 14
- */
+// /**
+//  * SOAL NO. 14
+//  */
 
 
-/**
- * Lengkapi function berikut di mana function berikut mengembalikan hasil penjumlahan terbesar dari dua elemen di dalam array
- */
+// /**
+//  * Lengkapi function berikut di mana function berikut mengembalikan hasil penjumlahan terbesar dari dua elemen di dalam array
+//  */
 
 
 function biggestSum(array) {
+  // array sorting => descending (terbesar => terkecil) 
+  // menjumlahkan index 0 dan index 1 (kalau ada)
+  array.sort((a, b) => b - a)
+  let temp;
 
+  if (array[1]) {
+    temp = array[1]
+  } else {
+    temp = 0
+  }
+  return array[0] + temp
 }
 
 
@@ -132,19 +169,44 @@ console.log(biggestSum([1, 0, 9, 2, 4])) // expected output: 13
 console.log(biggestSum([9])) // expected output: 9
 
 
-/**
- * SOAL NO. 15
- */
+// /**
+//  * SOAL NO. 15
+//  */
 
-/**
- * Function flippingMatrix menerima sebuah array 2 dimensi di mana jumlah kolom = jumlah baris.
- * Lengkapi function flippingMatrix di mana function tersebut berfungsi untuk membalik salah satu baris,
- * dari array 2 dimensi, di mana baris tersebut memiliki hasil penjumlahan elemen-elemen terbesar
- */
+// /**
+//  * Function flippingMatrix menerima sebuah array 2 dimensi di mana jumlah kolom = jumlah baris.
+//  * Lengkapi function flippingMatrix di mana function tersebut berfungsi untuk membalik salah satu baris,
+//  * dari array 2 dimensi, di mana baris tersebut memiliki hasil penjumlahan elemen-elemen terbesar
+//  */
 
 
 function flippingMatrix(array) {
+  // ngecek per baris
+  // lalu menjumlahkan semua elemen dalam 1 baris
+  // lalu membandingkan dengan variabel
 
+  // menampung hasil penjumlahan terbesar dan indexnya
+  let temp = {
+    sum: null, // hasil penjumlahan
+    index: null, // index dari baris yang kita hitung
+  }
+  array.forEach((element, index) => {
+    let count = 0
+    element.forEach(e => {
+      count += e
+    })
+    if (temp.sum == null || temp.sum < count) {
+      temp.sum = count,
+      temp.index = index
+    }
+  })
+
+  array.forEach((element, index) => {
+    if (index === temp.index) {
+      element.reverse()
+    }
+  })
+  return array
 }
 
 
