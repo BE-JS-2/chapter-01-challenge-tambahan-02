@@ -105,6 +105,8 @@ console.log(
 
  function slice(data, start, end) {
   // your code here
+  data = data.slice(start, end)
+  return data
 }
 
 console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 2)) // [ 'camel', 'duck', 'elephant' ]
@@ -125,7 +127,13 @@ console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 20)) //[]
 
 
 function biggestSum(array) {
+  let sum = 0;
 
+  arr = array.sort()
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  return sum;
 }
 
 
@@ -146,7 +154,19 @@ console.log(biggestSum([9])) // expected output: 9
 
 
 function flippingMatrix(array) {
-
+  const m = array;
+let len = m.length;
+let sum = 0;
+let elMax;
+const newArr = [];
+for (let i = 0; i < (len / 2); i++) {
+for (let j = 0; j < (len / 2); j++) {
+elMax = Math.max(m[i][j], m[i][len - 1 - j], m[len - 1 - i][j],
+m[len - 1 - i][len - 1 - j]);
+newArr.push(elMax);
+}
+}
+return newArr
 }
 
 
